@@ -1,0 +1,21 @@
+1. Korzystaj¹c z pliku .bash_history wypisz 10 najczêœciej u¿ywanych poleceñ
+cat ~/.bash_history | sort | uniq -c | sort -n | tail -10
+
+2. Wypisz nzwy powtarzaj¹cych siê plików z katalogach /bin i /usr/bin (nazwy plików, które sa w obu katalogach)
+diff -sr /bin /usr/bin | grep "identyczne$" | cut -d" " -f2
+
+3. Wypisz ile wolnego miejsca jest na partycji do której zmontowany jest katalog /home
+df -h | tr -s " " | grep "/home$" | cut -d" " -f4
+
+4. Policz ilu w pliku /etc/passwd jest uzytkowników, których grup¹ podstawow¹ jest grupa "root"
+cat /etc/passwd | cut -d":" -f4 | grep "^0" | wc -l
+
+5. Korzystajac z polecenia lastlog wypisz u¿ytkowników, którzy nie logowali siê ani razu.
+lastlog | grep "**Nigdy nie zalogowany**" | tr -s " " | cut -d " " -f1 | sort
+
+6. W pliku /etc/group zamieñ wszystkie ma³e litery na wielkie i zapisz zmienione dane do nowego pliku. 
+cat /etc/group | tr [a-z] [A-Z] > groupDuzeLitery
+
+7. Wypisz 3 najwiêksze podkatalogi swojego katalogu domowego.
+Rozmiar katalogu ma nie uwzgêdniaæ podkatalogów.
+du -bS ~ | sort -nr | head -3
